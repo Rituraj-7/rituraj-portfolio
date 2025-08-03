@@ -3,11 +3,11 @@ pipeline {
 
     environment {
         REPO_URL = 'https://github.com/Rituraj-7/rituraj-portfolio.git'
-        BRANCH = 'main' // adjust if you're using 'master'
+        BRANCH = 'main'
         DOCKER_IMAGE = 'grunner/rituraj-portfolio'
         TAG = 'latest'
         K8S_DEPLOYMENT = 'portfolio-deployment'
-        KUBECONFIG_CREDENTIAL_ID = 'kubeconfig' // if using Jenkins credentials plugin
+        KUBECONFIG_CREDENTIAL_ID = 'kubeconfig'
     }
 
     stages {
@@ -42,7 +42,8 @@ pipeline {
             steps {
                 script {
                     sh """
-                        kubectl set image deployment/${K8S_DEPLOYMENT} portfolio=${DOCKER_IMAGE}:${TAG} --record
+                        kubectl apply -f deployment.yaml
+                        kubectl apply -f service.yaml
                     """
                 }
             }
@@ -51,10 +52,10 @@ pipeline {
 
     post {
         success {
-            echo ' Deployment successful!'
+            echo '✅ Deployment successful!'
         }
         failure {
-            echo ' Error!'
+            echo '❌ Deployment failed! Check logs and scream internally.'
         }
     }
 }
