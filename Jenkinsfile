@@ -55,7 +55,7 @@ pipeline {
             echo '✅ Deployment successful!'
         }
         failure {
-            echo '❌ Deployment failed! Check logs and scream internally.'
+            echo 'Deployment failed! Check logs.'
         }
     }
 }
