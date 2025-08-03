@@ -17,6 +17,6 @@ spec:
       containers:
         - name: portfolio
           image: grunner/rituraj-portfolio:latest
-          imagePullPolicy: IfNotPresent  # Change this to your DockerHub/ECR image if needed
+          imagePullPolicy: IfNotPresent  
           ports:
             - containerPort: 80
